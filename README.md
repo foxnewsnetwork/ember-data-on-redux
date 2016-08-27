@@ -1,6 +1,9 @@
 # Ember-data-on-redux
 
-This README outlines the details of collaborating on this Ember addon.
+Properly integrating ember.js and ember-data with ember-redux
+
+## Usage
+
 
 ## Installation
 

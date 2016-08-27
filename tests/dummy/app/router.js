@@ -7,6 +7,11 @@ const Router = Ember.Router.extend({
 });
 
 Router.map(function() {
+  this.route('orchard', { path: 'orchard' }, function() {
+    this.route('tree', { path: 'tree/:tree_id' }, function() {
+      this.route('apple');
+    });
+  });
 });
 
 export default Router;
