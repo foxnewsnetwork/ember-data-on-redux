@@ -12,6 +12,11 @@ Router.map(function() {
       this.route('apple');
     });
   });
+  this.route('ranch', {path: 'ranch'}, function() {
+    this.route('coop', { path: 'coop'}, function() {
+      this.route('chicken');
+    });
+  });
 });
 
 export default Router;

@@ -7,6 +7,7 @@ moduleForAcceptance('Acceptance | route state');
 test('Redux should properly maintain router state', function(assert) {
   let redux = null;
   let container = null;
+  server.createList('tree', 10);
   visit('/');
 
   andThen(() => {
@@ -39,7 +40,7 @@ test('Redux should properly maintain router state', function(assert) {
     const { ds: state } = redux.getState();
     assert.ok(state);
     assert.deepEqual(state.get('activeRoutes').toArray(),
-      ['application', 'orchard', 'orchard.index', 'tree', 'tree.index']);
+      ['application', 'orchard', 'orchard.tree', 'orchard.tree.index']);
 
     visit('/orchard/tree/1/apple');
   });
@@ -48,6 +49,15 @@ test('Redux should properly maintain router state', function(assert) {
     const { ds: state } = redux.getState();
 
     assert.deepEqual(state.get('activeRoutes').toArray(),
-      ['application', 'orchard', 'orchard.index', 'tree', 'tree.index', 'apple']);
+      ['application', 'orchard', 'orchard.tree', 'orchard.tree.apple']);
+
+    visit('/ranch/coop/chicken');
+  });
+
+  andThen(function() {
+    const { ds: state } = redux.getState();
+
+    assert.deepEqual(state.get('activeRoutes').toArray(),
+      ['application', 'ranch', 'ranch.coop', 'ranch.coop.chicken']);
   });
 });
